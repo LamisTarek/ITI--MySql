@@ -1,0 +1,54 @@
+CREATE table students(
+    id INT NOT NULL PRIMARY KEY,
+    name varchar(50) NOT NULL,
+    email varchar(50) NOT NULL,
+    address varchar(255) NOT NULL
+);
+
+CREATE TABLE phone_numbers (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  student_id INT NOT NULL,
+  phone_number VARCHAR(20) NOT NULL,
+  FOREIGN KEY (student_id) REFERENCES students(id)
+);
+
+CREATE TABLE subjects (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  name VARCHAR(50) NOT NULL,
+  description VARCHAR(255) NOT NULL,
+  max_score INT NOT NULL
+);
+
+CREATE TABLE exam_results (
+  id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  student_id INT NOT NULL,
+  subject_id INT NOT NULL,
+  score INT NOT NULL,
+  exam_date DATE NOT NULL,
+  FOREIGN KEY (student_id) REFERENCES students(id),
+  FOREIGN KEY (subject_id) REFERENCES subjects(id)
+);
+
+INSERT INTO students (name,email,address) VALUES('Lamis Tarek','lolo@email.com','mansoura');
+INSERT INTO students (name,email,address) VALUES('Asmaa Ahmed','smsm@email.com','mansoura');
+INSERT INTO students (name,email,address) VALUES('Enas Ahmed','nosa@email.com','Cairo');
+INSERT INTO students (name,email,address) VALUES('Eman Akram','emo@email.com','Alex');
+
+INSERT INTO phone_numbers (student_id,phone_number) VALUES(1,"010");
+INSERT INTO phone_numbers (student_id,phone_number) VALUES(2,"010");
+INSERT INTO phone_numbers (student_id,phone_number) VALUES(3,"011");
+INSERT INTO phone_numbers (student_id,phone_number) VALUES(4,"012");
+
+INSERT INTO subjects (name,description,max_score) VALUES("php","php is a programing lang",100);
+INSERT INTO subjects (name,description,max_score) VALUES("node","node is a programing lang",120);
+INSERT INTO subjects (name,description,max_score) VALUES("python","python is a programing lang",150);
+INSERT INTO subjects (name,description,max_score) VALUES("c","c is a programing lang",100);
+
+
+
+INSERT INTO student_subjects (student_id,subject_id) VALUES(1,1);
+INSERT INTO student_subjects (student_id,subject_id) VALUES(1,2);
+INSERT INTO student_subjects (student_id,subject_id) VALUES(2,1);
+INSERT INTO student_subjects (student_id,subject_id) VALUES(2,4);
+
+INSERT INTO exam_results (student_id,subject_id,score,exam_date) VALUES(1,1,70,NOW());
